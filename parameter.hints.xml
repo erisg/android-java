@@ -1,0 +1,9 @@
+<application>
+  <component name="ParameterNameHintsSettings">
+    <blacklists>
+      <blacklist language="Java">
+        <added pattern="com.google.android.gms.maps.model.MapStyleOptions.loadRawResourceStyle(context,i)" />
+      </blacklist>
+    </blacklists>
+  </component>
+</application>
