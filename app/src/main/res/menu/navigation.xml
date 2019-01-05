@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_parches"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_galery"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_galery" />
+
+    <item
+        android:id="@+id/navigation_skateshop"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_skateshop" />
+
+</menu>
