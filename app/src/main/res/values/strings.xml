@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GoSkate</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">parches</string>
+    <string name="title_galery"></string>
+    <string name="title_skateshop">SkateShop</string>
+</resources>
