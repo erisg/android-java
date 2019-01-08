@@ -4,4 +4,7 @@
     <string name="title_dashboard">parches</string>
     <string name="title_galery"></string>
     <string name="title_skateshop">SkateShop</string>
+    <string name="title_post_rider">Rider</string>
+    <string name="title_post_truco">Truco</string>
+    <string name="title_post_spot">Spot</string>
 </resources>
