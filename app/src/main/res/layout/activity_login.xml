@@ -12,20 +12,24 @@
         android:layout_height="124dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="100dp"
         android:layout_marginTop="55dp"
+        android:layout_marginEnd="106dp"
         android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/logo" />
 
 
     <EditText
         android:id="@+id/email_login"
-        android:layout_width="match_parent"
+        android:layout_width="316dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="230dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="199dp"
+        android:layout_marginEnd="30dp"
         android:autofillHints="email"
         android:hint="@string/title_email"
         android:inputType="textEmailAddress"
@@ -35,12 +39,13 @@
 
     <EditText
         android:id="@+id/password_login"
-        android:layout_width="match_parent"
+        android:layout_width="319dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="308dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginEnd="26dp"
         android:autofillHints="Password"
         android:hint="@string/title_password"
         android:inputType="textPassword"
@@ -51,9 +56,26 @@
         android:id="@+id/ingresar_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/password_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="92dp" />
+        android:layout_marginTop="33dp"
+        android:text="@string/title_ingresar"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        tools:text="@string/title_ingresar" />
+
+    <TextView
+        android:id="@+id/user_nocount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="140dp"
+        android:contentDescription="@string/no_user_count"
+        android:text="@string/no_user_count"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
 
 </RelativeLayout>

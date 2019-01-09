@@ -10,4 +10,7 @@
     <string name="title_password">Password...</string>
     <string name="title_registro">REGISTRARSE</string>
     <string name="title_email">Email...</string>
+    <string name="title_ingresar">Ingresar</string>
+    <string name="title_ingresar_con">Ingresar con</string>
+    <string name="no_user_count">¿Aun no tienes una cuenta?</string>
 </resources>
