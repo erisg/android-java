@@ -19,27 +19,29 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-    android:id="@+id/email"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="0dp"
-    android:layout_marginTop="230dp"
-    android:autofillHints="email"
-    android:hint="@string/title_email"
-    android:inputType="textEmailAddress"
-    android:textColor="@color/colorPrimaryDark"
-    tools:targetApi="o" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
+        android:id="@+id/email"
+        android:layout_width="346dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="350dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="10dp"
+        android:autofillHints="email"
+        android:hint="@string/title_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryDark"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="298dp"
         android:autofillHints="Password"
         android:hint="@string/title_password"
         android:inputType="textPassword"
@@ -47,13 +49,13 @@
         tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/password1"
-        android:layout_width="match_parent"
+        android:id="@+id/passwordp"
+        android:layout_width="342dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="290dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="356dp"
         android:autofillHints="Password"
         android:hint="@string/title_password"
         android:inputType="textPassword"
@@ -66,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="109dp"
+        android:layout_marginBottom="115dp"
         android:contentDescription="@string/app_name"
         android:text="@string/title_registro" />
 
