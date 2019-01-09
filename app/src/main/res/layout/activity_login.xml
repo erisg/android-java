@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
-    tools:context=".registroActivity">
+    tools:context=".loginActivity">
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/login_icon"
         android:layout_width="178dp"
         android:layout_height="124dp"
         android:layout_alignParentStart="true"
@@ -18,22 +17,24 @@
         android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/logo" />
 
-    <EditText
-    android:id="@+id/email"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="0dp"
-    android:layout_marginTop="230dp"
-    android:autofillHints="email"
-    android:hint="@string/title_email"
-    android:inputType="textEmailAddress"
-    android:textColor="@color/colorPrimaryDark"
-    tools:targetApi="o" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/email_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="230dp"
+        android:autofillHints="email"
+        android:hint="@string/title_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorPrimaryDark"
+        tools:targetApi="o" />
+
+
+    <EditText
+        android:id="@+id/password_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -47,13 +48,12 @@
         tools:targetApi="o" />
 
     <Button
-        android:id="@+id/registrar_user"
+        android:id="@+id/ingresar_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="109dp"
-        android:contentDescription="@string/app_name"
-        android:text="@string/title_registro" />
+        android:layout_marginBottom="92dp" />
+
 
 </RelativeLayout>

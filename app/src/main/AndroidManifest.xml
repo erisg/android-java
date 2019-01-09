@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PostActivity" />
-        <activity android:name=".registroActivity"></activity>
+        <activity android:name=".registroActivity" />
+        <activity android:name=".loginActivity"></activity>
     </application>
 
 </manifest>
