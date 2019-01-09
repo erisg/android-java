@@ -7,4 +7,7 @@
     <string name="title_post_rider">Rider</string>
     <string name="title_post_truco">Truco</string>
     <string name="title_post_spot">Spot</string>
+    <string name="title_password">Password...</string>
+    <string name="title_registro">REGISTRARSE</string>
+    <string name="title_email">Email...</string>
 </resources>
