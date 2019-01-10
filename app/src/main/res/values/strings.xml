@@ -13,4 +13,5 @@
     <string name="title_ingresar">Ingresar</string>
     <string name="title_ingresar_con">Ingresar con</string>
     <string name="no_user_count">¿Aun no tienes una cuenta?</string>
+    <string name="title_salir">Salir</string>
 </resources>

@@ -9,7 +9,8 @@
     tools:context=".MainActivity"
     >
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
+
         android:id="@+id/add_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +20,8 @@
         android:layout_marginTop="0dp"
         android:background="@color/colorPrimaryDark">
 
-    </Toolbar>
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
@@ -43,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="9dp"
         android:contentDescription="@string/app_name"
         android:text="@string/app_name"
         android:textSize="30sp"
@@ -55,22 +57,37 @@
         android:layout_width="match_parent"
         android:layout_height="458dp"
         android:layout_below="@+id/add_post"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-1dp" />
 
     <ImageButton
         android:id="@+id/post_button"
         android:layout_width="39dp"
         android:layout_height="35dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="13dp"
         android:background="@color/colorPrimaryDark"
         android:baselineAlignBottom="false"
         android:contentDescription="@string/app_name"
         android:focusableInTouchMode="false"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_action_galery" />
+
+    <ImageButton
+        android:id="@+id/salir"
+        android:layout_width="38dp"
+        android:layout_height="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/colorPrimaryDark"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_action_salir" />
 
 
 </RelativeLayout>
