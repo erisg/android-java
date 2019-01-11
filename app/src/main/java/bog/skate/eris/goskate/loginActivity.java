@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.security.PrivateKey;
 
@@ -59,18 +58,6 @@ public class loginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser == null)
-        {
-            SendUserToMainActivity();
-        }
-    }
-
     private void AllowingUserToLogin()
     {
         String email = UserEmail.getText().toString();
@@ -87,7 +74,7 @@ public class loginActivity extends AppCompatActivity {
         else
         {
             loadingBar.setTitle("Ingresando...");
-            loadingBar.setMessage("Espera ingresando a GoSkate Bogota");
+            loadingBar.setMessage("Ingresando a GoSkate Bogota");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 

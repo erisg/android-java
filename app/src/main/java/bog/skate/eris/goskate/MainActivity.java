@@ -52,17 +52,29 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
+
+
+        // Post Button
+
         post_button = (ImageButton) findViewById(R.id.post_button);
+
+
         post_button.setOnClickListener(new View.OnClickListener()
-
         {
-            @Override
-            public void onClick(View view)
-            {
 
+            @Override
+            public void onClick(View v)
+            {
+                SendUserToPostActivity();
             }
         });
 
+    }
+
+    private void SendUserToPostActivity()
+    {
+        Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
+        startActivity(postIntent);
     }
 
     private void UserMenuSelector(MenuItem item)
@@ -70,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Activity activity = null;
         switch (item.getItemId())
         {
-
             case R.id.navigation_home:
             break;
 
@@ -80,15 +91,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.navigation_skateshop:
                 break;
 
-            case R.id.navigation_salir:
-                mAuth.signOut();
-                SendUserToLoginActivity();
-                break;
         }
 
     }
 
-  @Override
+
+
+    @Override
    protected void onStart()
   {
       super.onStart();
@@ -99,15 +108,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
           SendUserToLoginActivity();
       }
 
-  }
 
-
-
-    private void SendUserToSetupActivity()
-    {
-        Intent  setupIntent = new Intent(MainActivity.this, MainActivity.class);
-        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        finish();
     }
 
 
