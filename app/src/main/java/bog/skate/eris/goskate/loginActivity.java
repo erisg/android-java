@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.PrivateKey;
+import java.util.HashMap;
 
 public class loginActivity extends AppCompatActivity {
 
@@ -27,6 +30,9 @@ public class loginActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference UserRef;
+
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
         NeedNewAccount = (TextView) findViewById(R.id.user_nocount);
@@ -54,8 +61,41 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view)
             {
               AllowingUserToLogin();
+
+              SaveAccountInformation();
             }
         });
+    }
+
+    private void SaveAccountInformation()
+    {
+        String username = UserEmail.getText().toString();
+
+        if (TextUtils.isEmpty(username))
+        {
+            Toast.makeText(this,"Ingresa tu Email", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            HashMap userMap = new HashMap();
+            userMap.put("userEmail", username);
+            UserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task)
+                {
+                    if (task.isSuccessful())
+                    {
+
+                        Toast.makeText(loginActivity.this,"creado exitosamente", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        String message = task.getException().getMessage();
+                        Toast.makeText(loginActivity.this,"error: ",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     private void AllowingUserToLogin()

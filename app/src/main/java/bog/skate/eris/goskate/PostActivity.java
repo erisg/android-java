@@ -18,7 +18,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,8 +44,10 @@ public class PostActivity extends AppCompatActivity {
     private String Descrption, Description1, Descrption2;
 
     private StorageReference PostsImageRefrence;
+    private DatabaseReference userRef;
+    private FirebaseAuth mAuth;
 
-    private String saveCurrentDate, saveCurrentTime, postRandomName;
+    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
 
 
     @Override
@@ -49,8 +56,11 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        mAuth= FirebaseAuth.getInstance();
+        current_user_id = mAuth.getCurrentUser().getUid();
 
         PostsImageRefrence = FirebaseStorage.getInstance().getReference();
+        userRef =FirebaseDatabase.getInstance().getReference().child("usuarios");
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post);
         UpdatePostButton = (Button) findViewById(R.id.enviar_post);
@@ -134,7 +144,10 @@ public class PostActivity extends AppCompatActivity {
             {
               if (task.isSuccessful())
               {
+                  downloadUrl = task.getResult().toString();
                   Toast.makeText(PostActivity.this, "Publicacion Exitosa...",Toast.LENGTH_SHORT).show();
+
+                  SavingPostInformationToDatabase();
 
               }
               else
@@ -144,6 +157,25 @@ public class PostActivity extends AppCompatActivity {
               }
             }
         });
+    }
+
+    private void SavingPostInformationToDatabase()
+    {
+       userRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+           {
+              if (dataSnapshot.exists())
+              {
+                  String usercorreo = dataSnapshot.child("correo").getValue().toString();
+              }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
     }
 
     private void OpenGalery()
