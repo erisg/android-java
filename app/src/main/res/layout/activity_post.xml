@@ -50,7 +50,7 @@
         android:layout_marginBottom="32dp"
         android:autofillHints="Password"
         android:hint="@string/title_post_truco"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
         tools:targetApi="o" />
 
@@ -66,7 +66,7 @@
         android:layout_marginBottom="127dp"
         android:autofillHints="Password"
         android:hint="@string/title_post_rider"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
         tools:targetApi="o" />
 
@@ -82,7 +82,7 @@
         android:layout_marginBottom="-115dp"
         android:autofillHints="Password"
         android:hint="@string/title_post_spot"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
         tools:targetApi="o" />
 
