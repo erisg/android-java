@@ -8,11 +8,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+
+    private RecyclerView postList;
 
     // botones
 
@@ -52,43 +59,47 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
+        postList = (RecyclerView) findViewById(R.id.user_post_list);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
+
+
+
+        // Post Button
+
         post_button = (ImageButton) findViewById(R.id.post_button);
+
+
         post_button.setOnClickListener(new View.OnClickListener()
-
         {
-            @Override
-            public void onClick(View view)
-            {
 
+            @Override
+            public void onClick(View v)
+            {
+                SendUserToPostActivity();
             }
         });
 
+        DisplayAllUserPosts();
+
     }
 
-    private void UserMenuSelector(MenuItem item)
+    private void DisplayAllUserPosts()
     {
-        Activity activity = null;
-        switch (item.getItemId())
-        {
-
-            case R.id.navigation_home:
-            break;
-
-            case R.id.navigation_parches:
-                break;
-
-            case R.id.navigation_skateshop:
-                break;
-
-            case R.id.navigation_salir:
-                mAuth.signOut();
-                SendUserToLoginActivity();
-                break;
-        }
 
     }
 
-  @Override
+    private void SendUserToPostActivity()
+    {
+        Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
+        startActivity(postIntent);
+    }
+
+
+    @Override
    protected void onStart()
   {
       super.onStart();
@@ -99,15 +110,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
           SendUserToLoginActivity();
       }
 
-  }
 
-
-
-    private void SendUserToSetupActivity()
-    {
-        Intent  setupIntent = new Intent(MainActivity.this, MainActivity.class);
-        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        finish();
     }
 
 
@@ -120,7 +123,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        UserMenuSelector(item);
         return false;
+    }
+
+    private void UserMenuSelector(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.navigation_home:
+                break;
+
+            case R.id.navigation_parches:
+                Intent a = new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(a);
+                break;
+
+            case R.id.navigation_skateshop:
+                break;
+        }
     }
 }

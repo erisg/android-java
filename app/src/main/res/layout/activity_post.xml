@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
     tools:context=".PostActivity">
 
-    <Toolbar
+    <android.support.v7.widget.Toolbar
         android:id="@+id/add_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +14,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:background="@color/colorPrimaryDark"></Toolbar>
+        android:background="@color/colorPrimaryDark">
+
+    </android.support.v7.widget.Toolbar>
 
     <ImageButton
         android:id="@+id/select_post"
@@ -24,9 +25,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="115dp"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitCenter"
         app:srcCompat="@drawable/ic_action_galery" />
 
     <Button
@@ -35,38 +35,56 @@
         android:layout_height="38dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="23dp"
         android:background="@drawable/h" />
 
     <EditText
-        android:layout_width="339dp"
+        android:id="@+id/truco"
+        android:layout_width="319dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/enviar_post"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginBottom="60dp"
-        android:hint="Rider"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="32dp"
+        android:autofillHints="Password"
+        android:hint="@string/title_post_truco"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
+        tools:targetApi="o" />
 
     <EditText
-        android:layout_width="340dp"
+        android:id="@+id/Rider"
+        android:layout_width="319dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginBottom="107dp"
-        android:hint="Truco"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="127dp"
+        android:autofillHints="Password"
+        android:hint="@string/title_post_rider"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
+        tools:targetApi="o" />
 
     <EditText
-        android:layout_width="341dp"
+        android:id="@+id/parche_post"
+        android:layout_width="319dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/select_post"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="157dp"
-        android:hint="Parche"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="-115dp"
+        android:autofillHints="Password"
+        android:hint="@string/title_post_spot"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorPrimaryDark"
+        tools:targetApi="o" />
 
 
 </RelativeLayout>
