@@ -8,11 +8,16 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+
+    private RecyclerView postList;
 
     // botones
 
@@ -52,6 +59,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
+        postList = (RecyclerView) findViewById(R.id.user_post_list);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
+
 
 
         // Post Button
@@ -69,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
+        DisplayAllUserPosts();
+
+    }
+
+    private void DisplayAllUserPosts()
+    {
+
     }
 
     private void SendUserToPostActivity()
@@ -76,25 +97,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Intent postIntent = new Intent(MainActivity.this, PostActivity.class);
         startActivity(postIntent);
     }
-
-    private void UserMenuSelector(MenuItem item)
-    {
-        Activity activity = null;
-        switch (item.getItemId())
-        {
-            case R.id.navigation_home:
-            break;
-
-            case R.id.navigation_parches:
-                break;
-
-            case R.id.navigation_skateshop:
-                break;
-
-        }
-
-    }
-
 
 
     @Override
@@ -121,7 +123,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        UserMenuSelector(item);
         return false;
+    }
+
+    private void UserMenuSelector(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.navigation_home:
+                break;
+
+            case R.id.navigation_parches:
+                Intent a = new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(a);
+                break;
+
+            case R.id.navigation_skateshop:
+                break;
+        }
     }
 }

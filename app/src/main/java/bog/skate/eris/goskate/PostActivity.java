@@ -1,5 +1,6 @@
 package bog.skate.eris.goskate;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Message;
@@ -30,10 +31,12 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class PostActivity extends AppCompatActivity {
 
     private Toolbar postadd;
+    private ProgressDialog loadingBar;
 
     private ImageButton SelectPostImage;
     private Button UpdatePostButton;
@@ -44,7 +47,7 @@ public class PostActivity extends AppCompatActivity {
     private String Descrption, Description1, Descrption2;
 
     private StorageReference PostsImageRefrence;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef, PostsRef;
     private FirebaseAuth mAuth;
 
     private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
@@ -61,12 +64,14 @@ public class PostActivity extends AppCompatActivity {
 
         PostsImageRefrence = FirebaseStorage.getInstance().getReference();
         userRef =FirebaseDatabase.getInstance().getReference().child("usuarios");
+        PostsRef =FirebaseDatabase.getInstance().getReference().child("posts");
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post);
         UpdatePostButton = (Button) findViewById(R.id.enviar_post);
         truco = (EditText) findViewById(R.id.truco);
         parche = (EditText) findViewById(R.id.parche_post);
         rider = (EditText) findViewById(R.id.Rider);
+        loadingBar = new ProgressDialog(this);
 
 
         postadd = (Toolbar) findViewById(R.id.add_post);
@@ -118,6 +123,12 @@ public class PostActivity extends AppCompatActivity {
         }
         else
         {
+            loadingBar.setTitle("Add new post");
+            loadingBar.setMessage("Subiendo Post...");
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(true);
+
+
             StoringImageToFirebaseStorage();
         }
 
@@ -159,6 +170,8 @@ public class PostActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void SavingPostInformationToDatabase()
     {
        userRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
@@ -168,6 +181,35 @@ public class PostActivity extends AppCompatActivity {
               if (dataSnapshot.exists())
               {
                   String usercorreo = dataSnapshot.child("correo").getValue().toString();
+
+                  HashMap postsMap = new HashMap();
+                  postsMap.put("uid", current_user_id);
+                  postsMap.put("date", saveCurrentDate);
+                  postsMap.put("time", saveCurrentTime);
+                  postsMap.put("postimage", downloadUrl);
+                  postsMap.put("description", Descrption);
+                  postsMap.put("description1", Description1);
+                  postsMap.put("descrption2", Descrption2);
+
+                  PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
+                          .addOnCompleteListener(new OnCompleteListener() {
+                              @Override
+                              public void onComplete(@NonNull Task task)
+                              {
+                                  if (task.isSuccessful())
+                                  {
+                                     SendMainActivity();
+                                      Toast.makeText(PostActivity.this, "compartida exitosamente", Toast.LENGTH_SHORT).show();
+                                      loadingBar.dismiss();
+                                  }
+                                  else
+                                  {
+                                      Toast.makeText(PostActivity.this, "Error Ocurrred",Toast.LENGTH_SHORT).show();
+                                      loadingBar.dismiss();
+                                  }
+                              }
+                          });
+
               }
            }
 
@@ -177,6 +219,8 @@ public class PostActivity extends AppCompatActivity {
            }
        });
     }
+
+
 
     private void OpenGalery()
     {
