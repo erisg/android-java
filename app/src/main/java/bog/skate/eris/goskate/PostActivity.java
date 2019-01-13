@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
     private Button UpdatePostButton;
     private EditText truco, parche, rider;
 
-    private static final int Gallery_Pick = 1 ;
+    private static final int Gallery_Pick = 1;
     private Uri ImageUri;
     private String Descrption, Description1, Descrption2;
 
@@ -54,17 +55,16 @@ public class PostActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
 
         PostsImageRefrence = FirebaseStorage.getInstance().getReference();
-        userRef =FirebaseDatabase.getInstance().getReference().child("usuarios");
-        PostsRef =FirebaseDatabase.getInstance().getReference().child("posts");
+        userRef = FirebaseDatabase.getInstance().getReference().child("usuarios");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("posts");
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post);
         UpdatePostButton = (Button) findViewById(R.id.enviar_post);
@@ -81,12 +81,10 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("New Post");
 
 
-        SelectPostImage.setOnClickListener(new View.OnClickListener()
-        {
+        SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-              OpenGalery();
+            public void onClick(View view) {
+                OpenGalery();
             }
         });
 
@@ -99,43 +97,31 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-    private void validatePost()
-    {
+    private void validatePost() {
         String Description = parche.getText().toString();
         String Description1 = rider.getText().toString();
         String Description2 = truco.getText().toString();
 
-        if(ImageUri == null)
-        {
+        if (ImageUri == null) {
             Toast.makeText(this, "select post image", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Description))
-        {
+        } else if (TextUtils.isEmpty(Description)) {
             Toast.makeText(this, "Ubicacion del parche", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Description1))
-        {
+        } else if (TextUtils.isEmpty(Description1)) {
             Toast.makeText(this, "Nombre del Rider", Toast.LENGTH_SHORT).show();
-        }
-        else if (TextUtils.isEmpty(Description2))
-        {
+        } else if (TextUtils.isEmpty(Description2)) {
             Toast.makeText(this, "Truco", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            loadingBar.setTitle("Add new post");
-            loadingBar.setMessage("Subiendo Post...");
+        } else {
+            loadingBar.setTitle("new post");
+            loadingBar.setMessage("Publicando");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
-
 
             StoringImageToFirebaseStorage();
         }
 
     }
 
-    private void StoringImageToFirebaseStorage()
-    {
+    private void StoringImageToFirebaseStorage() {
         Calendar calFordDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
         saveCurrentDate = currentDate.format(calFordDate.getTime());
@@ -144,121 +130,125 @@ public class PostActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(calFordDate.getTime());
 
-        postRandomName = saveCurrentDate+saveCurrentTime;
+        postRandomName = saveCurrentDate + saveCurrentTime;
 
 
-        StorageReference filePath = PostsImageRefrence.child("post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        final StorageReference filePath = PostsImageRefrence.child("post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
 
-        filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+        filePath.putFile(ImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
-            {
-              if (task.isSuccessful())
-              {
-                  downloadUrl = task.getResult().toString();
-                  Toast.makeText(PostActivity.this, "Publicacion Exitosa...",Toast.LENGTH_SHORT).show();
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()){
+                    throw task.getException();
+                }
+                return filePath.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downUri = task.getResult();
+                    Toast.makeText(PostActivity.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
 
-                  SavingPostInformationToDatabase();
-
-              }
-              else
-              {
-                  String message = task.getException().getMessage();
-                  Toast.makeText(PostActivity.this,"Error: "+ message,  Toast.LENGTH_SHORT).show();
-              }
+                    downloadUrl = downUri.toString();
+                    SavingPostInformationToDatabase();
+                }
+                else
+                {
+                    String message = task.getException().getMessage();
+                    Toast.makeText(PostActivity.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-
-
-    private void SavingPostInformationToDatabase()
-    {
-       userRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-           {
-              if (dataSnapshot.exists())
-              {
-                  String usercorreo = dataSnapshot.child("correo").getValue().toString();
-
-                  HashMap postsMap = new HashMap();
-                  postsMap.put("uid", current_user_id);
-                  postsMap.put("date", saveCurrentDate);
-                  postsMap.put("time", saveCurrentTime);
-                  postsMap.put("postimage", downloadUrl);
-                  postsMap.put("description", Descrption);
-                  postsMap.put("description1", Description1);
-                  postsMap.put("descrption2", Descrption2);
-
-                  PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
-                          .addOnCompleteListener(new OnCompleteListener() {
-                              @Override
-                              public void onComplete(@NonNull Task task)
-                              {
-                                  if (task.isSuccessful())
-                                  {
-                                     SendMainActivity();
-                                      Toast.makeText(PostActivity.this, "compartida exitosamente", Toast.LENGTH_SHORT).show();
-                                      loadingBar.dismiss();
-                                  }
-                                  else
-                                  {
-                                      Toast.makeText(PostActivity.this, "Error Ocurrred",Toast.LENGTH_SHORT).show();
-                                      loadingBar.dismiss();
-                                  }
-                              }
-                          });
-
-              }
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-           }
-       });
-    }
-
-
-
-    private void OpenGalery()
-    {
-        Intent galleryIntent = new Intent();
-        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-        galleryIntent.setType("image/*");
-        startActivityForResult(galleryIntent, Gallery_Pick);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode==Gallery_Pick && resultCode==RESULT_OK && data!=null)
+        private void SavingPostInformationToDatabase ()
         {
-            ImageUri = data.getData();
-            SelectPostImage.setImageURI(ImageUri);
+            userRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String userEmail = dataSnapshot.child("userEmail").getValue().toString();
+
+                        HashMap postsMap = new HashMap();
+                        postsMap.put("uid", current_user_id);
+                        postsMap.put("date", saveCurrentDate);
+                        postsMap.put("time", saveCurrentTime);
+                        postsMap.put("postimage", downloadUrl);
+                        postsMap.put("description", Descrption);
+                        postsMap.put("description1", Description1);
+                        postsMap.put("descrption2", Descrption2);
+
+                        PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
+                                .addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if (task.isSuccessful())
+                                        {
+                                            SendUserMainActivity();
+
+                                            Toast.makeText(PostActivity.this, "compartida exitosamente", Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+
+
+                                        }
+                                        else {
+                                            Toast.makeText(PostActivity.this, "Error Ocurrred", Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                        }
+                                    }
+                                });
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+
+        private void OpenGalery ()
+        {
+            Intent galleryIntent = new Intent();
+            galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+            galleryIntent.setType("image/*");
+            startActivityForResult(galleryIntent, Gallery_Pick);
+        }
+
+        @Override
+        protected void onActivityResult ( int requestCode, int resultCode, Intent data)
+        {
+
+            super.onActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
+                ImageUri = data.getData();
+                SelectPostImage.setImageURI(ImageUri);
+            }
+        }
+
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item)
+        {
+            int id = item.getItemId();
+
+            if (id == android.R.id.home) {
+                SendUserMainActivity();
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
+
+        private void SendUserMainActivity () {
+
+            Intent mainIntent = new Intent(PostActivity.this, MainActivity.class);
+            startActivity(mainIntent);
+
         }
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-
-        if(id == android.R.id.home) {
-            SendMainActivity();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void SendMainActivity() {
-
-        Intent mainIntent = new Intent(PostActivity.this,MainActivity.class);
-        startActivity(mainIntent);
-    }
-}
