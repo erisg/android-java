@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class registroActivity extends AppCompatActivity
 {
@@ -24,6 +28,9 @@ public class registroActivity extends AppCompatActivity
     private Button CreateAccountButton;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
+    private DatabaseReference UserRef;
+
+    String currentUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,6 +39,8 @@ public class registroActivity extends AppCompatActivity
         setContentView(R.layout.activity_registro);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserID);
 
 
         UserEmail = (EditText) findViewById(R.id.email);
@@ -41,13 +50,49 @@ public class registroActivity extends AppCompatActivity
         loadingBar = new ProgressDialog(this);
 
 
+
+
+
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
               CreateNewAcount();
+
+              SaveAccountSetupInformation();
             }
         });
+    }
+
+    private void SaveAccountSetupInformation()
+    {
+        String useremail = UserEmail.getText().toString();
+
+        if (TextUtils.isEmpty(useremail))
+        {
+            Toast.makeText(this, "Email..",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            HashMap userMap = new HashMap();
+            userMap.put("useremail", useremail);
+            UserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task)
+                {
+                    if (task.isSuccessful())
+                    {
+                        Toast.makeText(registroActivity.this, "Successfully" ,Toast.LENGTH_LONG).show();
+                        loadingBar.dismiss();
+                    }
+                    else
+                    {
+                         String message = task.getException().getMessage();
+                         Toast.makeText(registroActivity.this, "Error Ocurred: " +message,Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 
     private void CreateNewAcount()

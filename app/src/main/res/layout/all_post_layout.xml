@@ -4,114 +4,69 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:padding="5dp"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/logo"
-                android:scaleType="centerCrop"
-                android:layout_marginLeft="4dp"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:id="@+id/logo_post"
+                android:src="@drawable/logo"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:id="@+id/appname"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/app_name" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/title_post_rider"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="8dp"
-                    android:textAlignment="textStart"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryDark"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="5dp"
-                        android:padding="2dp">
-
-                        <TextView
-                            android:id="@+id/texxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="se ha actualizado una publicacion"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Date"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/Time"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Time"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13sp"
-                            android:textStyle="bold"/>
-
-                    </LinearLayout>
-
-            </LinearLayout>
-            
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_post_spot"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:padding="3dp"
-            android:textSize="14sp"
-            android:textColor="@color/colorPrimaryDark"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_post_truco"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:padding="3dp"
-            android:textSize="14sp"
-            android:textColor="@color/colorPrimaryDark"/>
-
         <ImageView
-            android:id="@+id/post_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="3dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop" />
+            android:layout_height="wrap_content"
+            android:id="@+id/post_image" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/title_post_spot"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description1"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/title_post_rider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description2"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/title_post_truco" />
 
 
     </LinearLayout>
