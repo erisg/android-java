@@ -60,43 +60,14 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+
               AllowingUserToLogin();
 
-              SaveAccountInformation();
             }
         });
     }
 
-    private void SaveAccountInformation()
-    {
-        String username = UserEmail.getText().toString();
 
-        if (TextUtils.isEmpty(username))
-        {
-            Toast.makeText(this,"Ingresa tu Email", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            HashMap userMap = new HashMap();
-            userMap.put("userEmail", username);
-            UserRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete(@NonNull Task task)
-                {
-                    if (task.isSuccessful())
-                    {
-
-                        Toast.makeText(loginActivity.this,"creado exitosamente", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        String message = task.getException().getMessage();
-                        Toast.makeText(loginActivity.this,"error: ",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
 
     private void AllowingUserToLogin()
     {
