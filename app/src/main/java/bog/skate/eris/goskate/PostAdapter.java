@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private FirebaseUser firebaseUser;
 
+    public PostAdapter(Context aContext, List<Post> mPost)
+    {
+        this.aContext = aContext;
+        this.mPost = mPost;
+    }
 
     @NonNull
     @Override
@@ -55,14 +61,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             super(itemView);
 
             post_image = itemView.findViewById(R.id.select_post);
-            description = itemView.findViewById(R.id.parche_post);
-            description1 = itemView.findViewById(R.id.Rider);
-            description2= itemView.findViewById(R.id.truco);
+            description = itemView.findViewById(R.id.description);
+            description1 = itemView.findViewById(R.id.description1);
+            description2= itemView.findViewById(R.id.description2);
         }
     }
 
     private void publiserInfo(final ImageView post_image, EditText description, EditText description1, EditText descrption2, String userid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

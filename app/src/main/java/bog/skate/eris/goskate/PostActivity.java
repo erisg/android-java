@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.style.UpdateAppearance;
+import android.util.EventLogTags;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -39,15 +41,15 @@ public class PostActivity extends AppCompatActivity {
     private Toolbar postadd;
     private ProgressDialog loadingBar;
 
-    private ImageButton SelectPostImage;
+    private ImageView SelectPostImage;
     private Button UpdatePostButton;
-    private EditText truco, parche, rider;
+    private EditText Descrption, Descrption1, Descrption2;
 
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
-    private String Descrption, Description1, Descrption2;
 
-    private StorageReference PostsImageRefrence;
+
+    private StorageReference storageReference;
     private DatabaseReference userRef, PostsRef;
     private FirebaseAuth mAuth;
 
@@ -62,15 +64,15 @@ public class PostActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
 
-        PostsImageRefrence = FirebaseStorage.getInstance().getReference();
-        userRef = FirebaseDatabase.getInstance().getReference().child("usuarios");
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("posts");
+        storageReference = FirebaseStorage.getInstance().getReference();
+        userRef = FirebaseDatabase.getInstance().getReference().child("users");
+        PostsRef = FirebaseDatabase.getInstance().getReference("Posts");
 
-        SelectPostImage = (ImageButton) findViewById(R.id.select_post);
+        SelectPostImage = (ImageView) findViewById(R.id.select_post);
         UpdatePostButton = (Button) findViewById(R.id.enviar_post);
-        truco = (EditText) findViewById(R.id.truco);
-        parche = (EditText) findViewById(R.id.parche_post);
-        rider = (EditText) findViewById(R.id.Rider);
+        Descrption = (EditText) findViewById(R.id.description);
+        Descrption1 = (EditText) findViewById(R.id.description1);
+        Descrption2 = (EditText) findViewById(R.id.description2);
         loadingBar = new ProgressDialog(this);
 
 
@@ -80,7 +82,20 @@ public class PostActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("New Post");
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            // getSupportActionBar().setHomeButtonEnabled(true);
 
+        }
+        else
+        {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            //getActionBar().setHomeButtonEnabled(true);
+        }
+
+        getSupportActionBar().setTitle("Update Post");
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,19 +113,20 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void validatePost() {
-        String Description = parche.getText().toString();
-        String Description1 = rider.getText().toString();
-        String Description2 = truco.getText().toString();
+        String Description = Descrption.getText().toString();
+        String Description1 = Descrption1.getText().toString();
+        String Description2 = Descrption2.getText().toString();
 
         if (ImageUri == null) {
-            Toast.makeText(this, "select post image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "select post image", Toast.LENGTH_SHORT);
         } else if (TextUtils.isEmpty(Description)) {
-            Toast.makeText(this, "Ubicacion del parche", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Ubicacion del parche", Toast.LENGTH_SHORT);
         } else if (TextUtils.isEmpty(Description1)) {
-            Toast.makeText(this, "Nombre del Rider", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Nombre del Rider", Toast.LENGTH_SHORT);
         } else if (TextUtils.isEmpty(Description2)) {
-            Toast.makeText(this, "Truco", Toast.LENGTH_SHORT).show();
-        } else {
+            Toast.makeText(getApplicationContext(), "Truco", Toast.LENGTH_SHORT);
+        }
+        else {
             loadingBar.setTitle("new post");
             loadingBar.setMessage("Publicando");
             loadingBar.show();
@@ -132,13 +148,11 @@ public class PostActivity extends AppCompatActivity {
 
         postRandomName = saveCurrentDate + saveCurrentTime;
 
-
-        final StorageReference filePath = PostsImageRefrence.child("post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
-
-
+        final StorageReference filePath = storageReference.child("post").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
         filePath.putFile(ImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception
+            {
                 if (!task.isSuccessful()){
                     throw task.getException();
                 }
@@ -147,9 +161,12 @@ public class PostActivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
+                if (task.isSuccessful())
+                {
+                    SendUserMainActivity();
                     Uri downUri = task.getResult();
-                    Toast.makeText(PostActivity.this, "Profile Image stored successfully to Firebase storage...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "save successfully", Toast.LENGTH_SHORT).show();
+
 
                     downloadUrl = downUri.toString();
                     SavingPostInformationToDatabase();
@@ -169,16 +186,16 @@ public class PostActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        String userEmail = dataSnapshot.child("userEmail").getValue().toString();
+                        String useremail = dataSnapshot.child("useremail").getValue().toString();
 
                         HashMap postsMap = new HashMap();
                         postsMap.put("uid", current_user_id);
                         postsMap.put("date", saveCurrentDate);
                         postsMap.put("time", saveCurrentTime);
-                        postsMap.put("postimage", downloadUrl);
+                        postsMap.put("postImage", downloadUrl);
                         postsMap.put("description", Descrption);
-                        postsMap.put("description1", Description1);
-                        postsMap.put("descrption2", Descrption2);
+                        postsMap.put("description1", Descrption1);
+                        postsMap.put("description2", Descrption2);
 
                         PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                                 .addOnCompleteListener(new OnCompleteListener() {

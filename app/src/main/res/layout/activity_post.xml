@@ -19,73 +19,80 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ImageButton
-        android:id="@+id/select_post"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="271dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="115dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/ic_action_galery" />
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <Button
-        android:id="@+id/enviar_post"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="23dp"
-        android:background="@drawable/h" />
+        <ImageView
+            android:id="@+id/select_post"
+            android:layout_width="370dp"
+            android:layout_height="227dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="0dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher" />
 
-    <EditText
-        android:id="@+id/description2"
-        android:layout_width="319dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/enviar_post"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="31dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="32dp"
-        android:autofillHints="Password"
-        android:hint="@string/title_post_truco"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="210dp"
+            android:hint="@string/title_post_spot"
+            android:inputType="text"
+            android:maxLines="5"
+            tools:text="@string/title_post_spot" />
 
-    <EditText
-        android:id="@+id/description1"
-        android:layout_width="319dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="127dp"
-        android:autofillHints="Password"
-        android:hint="@string/title_post_rider"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
+        <EditText
+            android:id="@+id/description1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="345dp"
+            android:layout_marginEnd="11dp"
+            android:hint="@string/title_post_rider"
+            android:inputType="text"
+            android:maxLines="5"
+            tools:text="@string/title_post_rider" />
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="319dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/select_post"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="-115dp"
-        android:autofillHints="Password"
-        android:hint="@string/title_post_spot"
-        android:inputType="textPersonName"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
+        <EditText
+            android:id="@+id/description2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="19dp"
+            android:layout_marginBottom="122dp"
+            android:hint="@string/title_post_truco"
+            android:inputType="text"
+            android:maxLines="5"
+            tools:text="@string/title_post_truco" />
+
+        <Button
+            android:id="@+id/enviar_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="134dp"
+            android:layout_marginBottom="46dp"
+            android:contentDescription="@string/app_name" />
 
 
+    </RelativeLayout>
 </RelativeLayout>

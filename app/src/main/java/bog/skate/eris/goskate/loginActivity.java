@@ -40,7 +40,7 @@ public class loginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("users");
 
 
         NeedNewAccount = (TextView) findViewById(R.id.user_nocount);
