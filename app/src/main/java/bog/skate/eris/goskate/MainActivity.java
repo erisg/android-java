@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,13 +54,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("users");
 
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
-        postList = (RecyclerView) findViewById(R.id.user_post_list);
+        postList = (RecyclerView) findViewById(R.id.reycler_view);
         postList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
