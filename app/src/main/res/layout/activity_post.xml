@@ -30,39 +30,17 @@
         android:padding="8dp">
 
 
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="286dp"
-            android:layout_height="51dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="59dp"
-            android:layout_marginTop="137dp"
-            android:layout_marginEnd="47dp"
-            android:layout_marginBottom="387dp"
-            android:background="@drawable/input"
-            android:contentDescription="@string/title_post_spot"
-            android:hint="@string/title_post_spot"
-            android:inputType="text"
-            android:maxLines="5"
-            android:text="@string/title_post_spot"
-            android:textAlignment="center"
-            tools:text="@string/title_post_spot" />
-
-
         <ImageView
             android:id="@+id/select_post"
             android:layout_width="374dp"
             android:layout_height="195dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/description"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginTop="188dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="176dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="184dp"
             android:background="@drawable/fondopost"
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside"
@@ -79,33 +57,33 @@
 
             <EditText
                 android:id="@+id/description1"
-                android:layout_width="253dp"
+                android:layout_width="280dp"
                 android:layout_height="38dp"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:autofillHints="Rider"
                 android:background="@drawable/input"
-                android:hint="@string/title_post_truco"
+                android:hint="@string/title_password"
                 android:inputType="text"
-                android:maxLines="5"
                 android:textAlignment="center"
-                tools:text="@string/title_post_rider" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:targetApi="o" />
 
             <EditText
                 android:id="@+id/description2"
-                android:layout_width="253dp"
-                android:layout_height="39dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginBottom="64dp"
+                android:layout_width="280dp"
+                android:layout_height="38dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="13dp"
+                android:autofillHints="Rider"
                 android:background="@drawable/input"
-                android:hint="@string/title_post_truco"
+                android:hint="@string/title_password"
                 android:inputType="text"
-                android:maxLines="5"
                 android:textAlignment="center"
-                tools:text="@string/title_post_truco" />
+                android:textColor="@color/colorPrimaryDark"
+                tools:targetApi="o" />
 
             <Button
                 android:id="@+id/enviar_post"
@@ -130,6 +108,24 @@
             android:layout_marginEnd="130dp"
             android:contentDescription="@string/app_name"
             app:srcCompat="@drawable/logoingre" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="309dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="157dp"
+            android:layout_marginEnd="61dp"
+            android:autofillHints="Rider"
+            android:background="@drawable/input"
+            android:hint="@string/title_password"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            tools:targetApi="o" />
 
 
     </RelativeLayout>

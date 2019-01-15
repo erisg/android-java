@@ -114,7 +114,7 @@ public class loginActivity extends AppCompatActivity {
 
     private void SendUserToMainActivity()
     {
-        Intent mainIntent = new Intent(loginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(loginActivity.this, registroActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
@@ -125,6 +125,7 @@ public class loginActivity extends AppCompatActivity {
     {
         Intent registerIntent = new Intent(loginActivity.this, registroActivity.class);
         startActivity(registerIntent);
+
 
     }
 }

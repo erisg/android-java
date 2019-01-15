@@ -13,17 +13,34 @@
         android:layout_height="124dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="101dp"
         android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/logoingre" />
+
+
+    <TextView
+        android:id="@+id/go_skate_dc"
+        android:layout_width="138dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="350dp"
+        android:text="@string/go_skate_bogota"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <RelativeLayout
         android:layout_width="353dp"
         android:layout_height="292dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="41dp"
         android:background="@drawable/amarillo">
 
         <EditText
@@ -82,13 +99,15 @@
 
         <Button
             android:id="@+id/registrar_user"
-            android:layout_width="154dp"
-            android:layout_height="49dp"
+            android:layout_width="156dp"
+            android:layout_height="68dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="29dp"
             android:background="@drawable/registrars"
             android:contentDescription="@string/app_name" />
     </RelativeLayout>
+
+
 
 </RelativeLayout>

@@ -15,4 +15,11 @@
     <string name="no_user_count">¿Aun no tienes una cuenta?</string>
     <string name="title_salir">Salir</string>
     <string name="title_activity_maps">Map</string>
+    <string name="shop_pisanlof">PIS AN LOF</string>
+    <string name="shop_descrption">Tienda de Skate donde encuentras Maderos,
+        Rodamientos, Medias,Ropa y mucho mas ...</string>
+    <string name="shop_direc_pisanlof"> CC Colombia Linda Carrera 7 # 23-49</string>
+    <string name="go_skate_bogota">GoSkate Bogota</string>
+    <string name="skate_shop">Skate Shop</string>
+
 </resources>

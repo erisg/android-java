@@ -95,7 +95,7 @@ public class PostActivity extends AppCompatActivity {
             //getActionBar().setHomeButtonEnabled(true);
         }
 
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("Publicar");
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

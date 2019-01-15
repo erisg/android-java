@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     // botones
 
     private ImageButton post_button;
-    private ImageButton salir;
+    private ImageButton salir_button;
 
 
     // autenticacion firebase
@@ -67,6 +67,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
 
+        salir_button = (ImageButton) findViewById(R.id.salir);
+
+        salir_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                mAuth.signOut();
+                SendUserToLoginActivity();
+
+            }
+        });
 
 
         // Post Button
@@ -119,7 +130,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     {
         Intent loginIntent = new Intent(MainActivity.this,loginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
         finish();
+
     }
 
 

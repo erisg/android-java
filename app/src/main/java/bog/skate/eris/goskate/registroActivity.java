@@ -46,7 +46,8 @@ public class registroActivity extends AppCompatActivity {
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 CreateNewAccount();
             }
         });
