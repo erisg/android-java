@@ -43,7 +43,7 @@ public class PostActivity extends AppCompatActivity {
 
     private ImageView SelectPostImage;
     private Button UpdatePostButton;
-    private EditText Descrption, Descrption1, Descrption2;
+    EditText Descrption, Descrption1, Descrption2;
 
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
@@ -66,7 +66,7 @@ public class PostActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         userRef = FirebaseDatabase.getInstance().getReference().child("users");
-        PostsRef = FirebaseDatabase.getInstance().getReference("Posts");
+        PostsRef = FirebaseDatabase.getInstance().getReference();
 
         SelectPostImage = (ImageView) findViewById(R.id.select_post);
         UpdatePostButton = (Button) findViewById(R.id.enviar_post);

@@ -143,6 +143,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
 
             case R.id.navigation_skateshop:
+                Intent b = new Intent(MainActivity.this,shopActivity.class);
+                startActivity(b);
                 break;
         }
     }
