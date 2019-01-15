@@ -80,7 +80,7 @@ public class PostActivity extends AppCompatActivity {
         setSupportActionBar(postadd);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("New Post");
+        getSupportActionBar().setTitle("New Publicacion");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

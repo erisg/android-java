@@ -25,8 +25,8 @@
         android:layout_height="270dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="85dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="109dp"
         android:background="@drawable/amarillo">
 
         <EditText
@@ -43,6 +43,8 @@
             android:background="@drawable/input"
             android:hint="@string/title_email"
             android:inputType="textEmailAddress"
+            android:text="@string/title_email"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             tools:targetApi="o" />
 
@@ -61,6 +63,7 @@
             android:background="@drawable/input"
             android:hint="@string/title_password"
             android:inputType="textPassword"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             tools:targetApi="o" />
 
@@ -86,7 +89,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="76dp"
             android:layout_marginEnd="73dp"
-            android:layout_marginBottom="33dp"
+            android:layout_marginBottom="31dp"
             android:background="@drawable/inputyet"
             android:contentDescription="@string/no_user_count"
             android:text="@string/no_user_count"
