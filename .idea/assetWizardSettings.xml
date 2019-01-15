@@ -70,8 +70,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="backgroundColor" value="030306" />
                                       <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="D:\GoSkate\app\src\main\res\mipmap-xxxhdpi\lgotipo.png" />
+                                      <entry key="outputName" value="ic_launcher_logo" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -81,7 +84,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>

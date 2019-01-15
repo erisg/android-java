@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/ingresofondi"
     tools:context=".registroActivity">
 
     <ImageView
@@ -16,60 +16,79 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="55dp"
         android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logoingre" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="346dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="10dp"
-        android:autofillHints="email"
-        android:hint="@string/title_email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
-
-    <EditText
-        android:id="@+id/password1"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="298dp"
-        android:autofillHints="Password"
-        android:hint="@string/title_password"
-        android:inputType="textPassword"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
-
-    <EditText
-        android:id="@+id/passwordp"
-        android:layout_width="342dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="356dp"
-        android:autofillHints="Password"
-        android:hint="@string/title_password"
-        android:inputType="textPassword"
-        android:textColor="@color/colorPrimaryDark"
-        tools:targetApi="o" />
-
-    <Button
-        android:id="@+id/registrar_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="353dp"
+        android:layout_height="292dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="115dp"
-        android:contentDescription="@string/app_name"
-        android:text="@string/title_registro" />
+        android:layout_marginBottom="72dp"
+        android:background="@drawable/amarillo">
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="307dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="28dp"
+            android:autofillHints="email"
+            android:background="@drawable/input"
+            android:hint="@string/title_email"
+            android:inputType="textEmailAddress"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/password1"
+            android:layout_width="309dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/passwordp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="26dp"
+            android:autofillHints="Password"
+            android:background="@drawable/input"
+            android:hint="@string/title_password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/passwordp"
+            android:layout_width="309dp"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="87dp"
+            android:layout_marginEnd="27dp"
+            android:autofillHints="Password"
+            android:background="@drawable/input"
+            android:hint="@string/title_password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            tools:targetApi="o" />
+
+        <Button
+            android:id="@+id/registrar_user"
+            android:layout_width="154dp"
+            android:layout_height="49dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="29dp"
+            android:background="@drawable/registrars"
+            android:contentDescription="@string/app_name" />
+    </RelativeLayout>
 
 </RelativeLayout>
