@@ -21,5 +21,8 @@
     <string name="shop_direc_pisanlof"> CC Colombia Linda Carrera 7 # 23-49</string>
     <string name="go_skate_bogota">GoSkate Bogota</string>
     <string name="skate_shop">Skate Shop</string>
+    <string name="date_post">Has been update a post</string>
+    <string name="date_datepost">Date</string>
+    <string name="time_post">Time</string>
 
 </resources>

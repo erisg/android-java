@@ -43,10 +43,11 @@ public class PostActivity extends AppCompatActivity {
 
     private ImageView SelectPostImage;
     private Button UpdatePostButton;
-    EditText Descrption, Descrption1, Descrption2;
+    private EditText Descrption, Descrption1, Descrption2;
 
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
+    private String Description, Description1, Description2;
 
 
     private StorageReference storageReference;
@@ -113,9 +114,9 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void validatePost() {
-        String Description = Descrption.getText().toString();
-        String Description1 = Descrption1.getText().toString();
-        String Description2 = Descrption2.getText().toString();
+        Description = Descrption.getText().toString();
+        Description1 = Descrption1.getText().toString();
+        Description2 = Descrption2.getText().toString();
 
         if (ImageUri == null) {
             Toast.makeText(getApplicationContext(), "select post image", Toast.LENGTH_SHORT);
